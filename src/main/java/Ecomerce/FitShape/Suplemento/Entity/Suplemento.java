@@ -3,10 +3,7 @@ package Ecomerce.FitShape.Suplemento.Entity;
 import Ecomerce.FitShape.Categoria.Entity.Categoria;
 import Ecomerce.FitShape.Ingrediente.Entity.Ingrediente;
 import Ecomerce.FitShape.Marca.Entity.Marca;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -23,10 +20,13 @@ public class Suplemento {
 
     private Float precoDeCusto;
 
+    @ManyToOne
     private Categoria categoria;
 
+    @ManyToOne
     private Marca marca;
 
+    @ManyToMany
     private List<Ingrediente> ingredientes;
 
     //Getters e Setters
