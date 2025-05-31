@@ -24,6 +24,7 @@ public class SuplementoServiceImplemento implements SuplementoService{
     public SuplementoDto salvar(SuplementoDto dto){
         Suplemento suplemento = mapper.toEntity(dto);
         return mapper.toDto(repository.save(suplemento));
+
     }
 
     @Override
@@ -47,4 +48,11 @@ public class SuplementoServiceImplemento implements SuplementoService{
         repository.deleteById(id);
     }
 
+    @Override
+    public SuplementoDto atualizar(Long id, SuplementoDto dto) {
+        Suplemento suplemento = repository.findById(id)
+                .orElseThrow(() -> new SuplementoNaoEncontradoException(id));
+        suplemento.setNome(dto.nome);
+        return mapper.toDto(repository.save(suplemento));
+    }
 }

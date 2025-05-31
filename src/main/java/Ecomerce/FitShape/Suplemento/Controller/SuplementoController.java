@@ -29,8 +29,14 @@ public class SuplementoController {
         return service.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public SuplementoDto atualizar(@PathVariable Long id, @RequestBody SuplementoDto dto) {
+        return service.atualizar(id, dto);
+    }
+
     public void deletar(@PathVariable Long id){
         service.deletar(id);
     }
+
 
 }
