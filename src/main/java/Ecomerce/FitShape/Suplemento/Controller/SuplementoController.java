@@ -1,6 +1,6 @@
 package Ecomerce.FitShape.Suplemento.Controller;
 
-import Ecomerce.FitShape.Suplemento.Dto.SuplementoDto;
+import Ecomerce.FitShape.Suplemento.Dto.SuplementoSalvarDto;
 import Ecomerce.FitShape.Suplemento.Service.SuplementoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,22 +18,22 @@ public class SuplementoController {
 
     //REQUISIÇÕES
     @PostMapping
-    public SuplementoDto salvar(@RequestBody SuplementoDto dto){
+    public SuplementoSalvarDto salvar(@RequestBody SuplementoSalvarDto dto){
         return service.salvar(dto);
     }
 
     @GetMapping
-    public List<SuplementoDto> listarTodos(){
+    public List<SuplementoSalvarDto> listarTodos(){
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public SuplementoDto buscarPorId(@PathVariable Long id){
+    public SuplementoSalvarDto buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
     }
 
     @PutMapping("/{id}")
-    public SuplementoDto atualizar(@PathVariable Long id, @RequestBody SuplementoDto dto) {
+    public SuplementoSalvarDto atualizar(@PathVariable Long id, @RequestBody SuplementoSalvarDto dto) {
         return service.atualizar(id, dto);
     }
 

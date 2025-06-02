@@ -2,8 +2,7 @@ package Ecomerce.FitShape.Suplemento.Dto;
 
 import java.util.List;
 
-public class SuplementoDto {
-    private Long id;
+public class SuplementoAtualizarDto {
     private String nome;
     private String descricao;
     private Float precoDeCusto;
@@ -12,14 +11,6 @@ public class SuplementoDto {
     private List<Long> ingredientesIds;
 
     //GETTERS E SETTERS
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -68,12 +59,11 @@ public class SuplementoDto {
         this.ingredientesIds = ingredientesIds;
     }
 
-    //CONSTRUTORES
-    public SuplementoDto(){
+    //CONSTRUTOR
+    public SuplementoAtualizarDto(){
     }
 
-    public SuplementoDto(Long id, String nome, String descricao, Float precoDeCusto, Long categoriaId, Long marcaId, List<Long> ingredientesIds) {
-        this.id = id;
+    public SuplementoAtualizarDto(String nome, String descricao, Float precoDeCusto, Long categoriaId, Long marcaId, List<Long> ingredientesIds) {
         this.nome = nome;
         this.descricao = descricao;
         this.precoDeCusto = precoDeCusto;

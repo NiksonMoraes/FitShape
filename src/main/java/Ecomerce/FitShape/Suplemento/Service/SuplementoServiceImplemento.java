@@ -1,6 +1,6 @@
 package Ecomerce.FitShape.Suplemento.Service;
 
-import Ecomerce.FitShape.Suplemento.Dto.SuplementoDto;
+import Ecomerce.FitShape.Suplemento.Dto.SuplementoSalvarDto;
 import Ecomerce.FitShape.Suplemento.Entity.Suplemento;
 import Ecomerce.FitShape.Suplemento.Exception.SuplementoNaoEncontradoException;
 import Ecomerce.FitShape.Suplemento.Mapper.SuplementoMapper;
@@ -23,22 +23,22 @@ public class SuplementoServiceImplemento implements SuplementoService{
 
     //METODOS
     @Override
-    public SuplementoDto salvar(SuplementoDto dto){
+    public SuplementoSalvarDto salvar(SuplementoSalvarDto dto){
         Suplemento suplemento = mapper.toEntity(dto);
-        return mapper.toDto(repository.save(suplemento));
+        return mapper.tosalvarDto(repository.save(suplemento));
     }
 
     @Override
-    public SuplementoDto buscarPorId(Long id){
+    public SuplementoSalvarDto buscarPorId(Long id){
         return repository.findById(id)
-                .map(mapper::toDto)
+                .map(mapper::tosalvarDto)
                 .orElseThrow(() -> new SuplementoNaoEncontradoException(id));
     }
 
     @Override
-    public List<SuplementoDto> listarTodos(){
+    public List<SuplementoSalvarDto> listarTodos(){
         return repository.findAll().stream()
-                .map(mapper::toDto)
+                .map(mapper::tosalvarDto)
                 .collect(Collectors.toList());
     }
     @Override
@@ -50,12 +50,12 @@ public class SuplementoServiceImplemento implements SuplementoService{
     }
 
     @Override
-    public SuplementoDto atualizar(Long id, SuplementoDto dto) {
+    public SuplementoSalvarDto atualizar(Long id, SuplementoSalvarDto dto) {
         if (!repository.existsById(id)) {
             throw new SuplementoNaoEncontradoException(id);
         }
-        dto.id = id;
-        Suplemento atualizado = repository.save(mapper.toEntity(dto));
-        return mapper.toDto(atualizado);
+        atualizarDto.id = id;
+        Suplemento atualizado = repository.save(mapper.toEntity(atualizarDto));
+        return mapper.toatualizarDto(atualizado);
     }
 }
