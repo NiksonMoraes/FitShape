@@ -11,10 +11,12 @@ import java.util.List;
 public class MarcaController {
     private final MarcaService service;
 
+    //CONSTRUTOR
     public MarcaController(MarcaService service) {
         this.service = service;
     }
 
+    //REQUISIÇÕES
     @GetMapping
     public List<MarcaDto> listarTodas() {
         return service.listarTodas();

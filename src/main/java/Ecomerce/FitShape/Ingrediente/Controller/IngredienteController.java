@@ -17,7 +17,7 @@ public class IngredienteController {
         this.service = service;
     }
 
-    //METODOS
+    //REQUISIÇÕES
     @GetMapping
     public List<IngredienteDto> listarTodos() {
         return service.listarTodos();

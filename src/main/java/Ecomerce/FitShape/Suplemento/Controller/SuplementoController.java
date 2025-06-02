@@ -16,7 +16,7 @@ public class SuplementoController {
         this.service = service;
     }
 
-    //METODOS
+    //REQUISIÇÕES
     @PostMapping
     public SuplementoDto salvar(@RequestBody SuplementoDto dto){
         return service.salvar(dto);
@@ -27,7 +27,7 @@ public class SuplementoController {
         return service.listarTodos();
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public SuplementoDto buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
     }
