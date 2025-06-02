@@ -11,12 +11,10 @@ import java.util.List;
 public class CategoriaController {
     private final CategoriaService service;
 
-    //CONSTRUTOR
     public CategoriaController(CategoriaService service) {
         this.service = service;
     }
 
-    //REQUISIÇÕES
     @GetMapping
     public List<CategoriaDto> listarTodos() {
         return service.listarTodos();

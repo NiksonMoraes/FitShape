@@ -36,25 +36,22 @@ public class SuplementoMapper {
         suplemento.setNome(dto.nome);
         suplemento.setDescricao(dto.descricao);
         suplemento.setPrecoDeCusto(dto.precoDeCusto);
-
-        if (dto.categoriaId != null) {
+        if (dto.categoriaId != null){
             Categoria categoria = categoriaRepository.findById(dto.categoriaId)
                     .orElseThrow(() -> new CategoriaNaoEncontradaException(dto.categoriaId));
             suplemento.setCategoria(categoria);
         }
-
-        if (dto.marcaId != null) {
+        if (dto.marcaId != null){
             Marca marca = marcaRepository.findById(dto.marcaId)
                     .orElseThrow(() -> new MarcaNaoEncontradaException(dto.marcaId));
             suplemento.setMarca(marca);
         }
-
-        if (dto.ingredientesIds != null){
-            List<Ingrediente> ingredientes = dto.ingredientesIds.stream()
-                .map(id -> ingredienteRepository.findById(id)
-                    .orElseThrow(() -> new IngredienteNaoEncontradoException(id)))
-                .collect(Collectors.toList());
-            suplemento.setIngredientes(ingredientes);
+        if (dto.ingredientesIds != null && !dto.ingredientesIds.isEmpty()) {
+                List<Ingrediente> ingredientes = dto.ingredientesIds.stream()
+                    .map(id -> ingredienteRepository.findById(id)
+                            .orElseThrow(() -> new IngredienteNaoEncontradoException(id)))
+                    .collect(Collectors.toList());
+                suplemento.setIngredientes(ingredientes);
         }
         return suplemento;
     }
@@ -70,10 +67,9 @@ public class SuplementoMapper {
         dto.categoriaId = suplemento.getCategoria() != null ? suplemento.getCategoria().getId() : null;
         dto.marcaId = suplemento.getMarca() != null ? suplemento.getMarca().getId() : null;
         dto.ingredientesIds = suplemento.getIngredientes() != null ?
-            suplemento.getIngredientes().stream()
-                .map(Ingrediente::getId)
-                .collect(Collectors.toList())
-            :List.of();
+                suplemento.getIngredientes().stream()
+                        .map(ingrediente -> ingrediente.getId())
+                .collect(Collectors.toList()): null;
         return dto;
     }
 
