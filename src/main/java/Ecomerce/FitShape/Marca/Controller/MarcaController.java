@@ -30,11 +30,6 @@ public class MarcaController {
         return service.salvar(dto);
     }
 
-    @PutMapping("/{id}")
-    public MarcaDto atualizar(@PathVariable Long id, @RequestBody MarcaDto dto) {
-        return service.atualizar(id, dto);
-    }
-
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         service.deletar(id);

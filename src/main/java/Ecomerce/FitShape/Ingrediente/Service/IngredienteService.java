@@ -9,5 +9,4 @@ public interface IngredienteService {
     IngredienteDto buscarPorId(Long id);
     List<IngredienteDto> listarTodos();
     void deletar(Long id);
-    IngredienteDto atualizar(Long id, IngredienteDto dto);
 }

@@ -49,13 +49,4 @@ public class SuplementoServiceImplemento implements SuplementoService{
         repository.deleteById(id);
     }
 
-    @Override
-    public SuplementoDto atualizar(Long id, SuplementoDto dto) {
-        if (!repository.existsById(id)) {
-            throw new SuplementoNaoEncontradoException(id);
-        }
-        dto.id = id;
-        Suplemento atualizado = repository.save(mapper.toEntity(dto));
-        return mapper.toDto(atualizado);
-    }
 }

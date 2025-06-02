@@ -8,6 +8,5 @@ public interface CategoriaService {
     CategoriaDto buscarPorId(Long id);
     List<CategoriaDto> listarTodos();
     void deletar(Long id);
-    CategoriaDto atualizar(Long id, CategoriaDto dto);
 
 }

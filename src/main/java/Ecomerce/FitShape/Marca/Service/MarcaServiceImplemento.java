@@ -48,12 +48,4 @@ public class MarcaServiceImplemento implements MarcaService {
             repository.deleteById(id);
         }
 
-        @Override
-        public MarcaDto atualizar(Long id, MarcaDto dto) {
-            Marca marca = repository.findById(id)
-                    .orElseThrow(() -> new MarcaNaoEncontradaException(id));
-            marca.setNome(dto.nome);
-            return mapper.toDto(repository.save(marca));
-        }
-
 }

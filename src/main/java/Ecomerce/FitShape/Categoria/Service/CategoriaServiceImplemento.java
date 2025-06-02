@@ -48,12 +48,5 @@ public class CategoriaServiceImplemento implements CategoriaService {
         repository.deleteById(id);
     }
 
-    @Override
-    public CategoriaDto atualizar(Long id, CategoriaDto dto) {
-        Categoria categoria = repository.findById(id)
-                .orElseThrow(() -> new CategoriaNaoEncontradaException(id));
-        categoria.setNome(dto.nome);
-        return mapper.toDto(repository.save(categoria));
-    }
 
 }

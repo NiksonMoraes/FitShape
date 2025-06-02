@@ -50,12 +50,4 @@ public class IngredienteServiceImplemento implements IngredienteService{
         repository.deleteById(id);
     }
 
-    @Override
-    public IngredienteDto atualizar(Long id, IngredienteDto dto) {
-        Ingrediente ingrediente = repository.findById(id)
-                .orElseThrow(() -> new IngredienteNaoEncontradoException(id));
-        ingrediente.setNome(dto.nome);
-        ingrediente.setQuantidade(dto.quantidade);
-        return mapper.toDto(repository.save(ingrediente));
-    }
 }

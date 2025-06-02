@@ -9,6 +9,5 @@ public interface SuplementoService {
     SuplementoDto buscarPorId(Long id);
     List<SuplementoDto> listarTodos();
     void deletar(Long id);
-    SuplementoDto atualizar(Long id, SuplementoDto dto);
 
 }

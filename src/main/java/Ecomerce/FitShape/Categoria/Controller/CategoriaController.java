@@ -30,11 +30,6 @@ public class CategoriaController {
         return service.salvar(dto);
     }
 
-    @PutMapping("/{id}")
-    public CategoriaDto atualizar(@PathVariable Long id, @RequestBody CategoriaDto dto) {
-        return service.atualizar(id, dto);
-    }
-
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         service.deletar(id);

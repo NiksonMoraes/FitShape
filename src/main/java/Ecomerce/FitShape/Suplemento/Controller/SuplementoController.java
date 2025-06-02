@@ -27,14 +27,9 @@ public class SuplementoController {
         return service.listarTodos();
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public SuplementoDto buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
-    }
-
-    @PutMapping("/{id}")
-    public SuplementoDto atualizar(@PathVariable Long id, @RequestBody SuplementoDto dto) {
-        return service.atualizar(id, dto);
     }
 
     @DeleteMapping("/{id}")

@@ -9,5 +9,4 @@ public interface MarcaService {
     MarcaDto buscarPorId(Long id);
     List<MarcaDto> listarTodas();
     void deletar(Long id);
-    MarcaDto atualizar(Long id, MarcaDto dto);
 }
