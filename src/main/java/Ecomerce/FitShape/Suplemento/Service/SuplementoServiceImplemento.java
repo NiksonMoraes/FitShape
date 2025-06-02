@@ -15,16 +15,17 @@ public class SuplementoServiceImplemento implements SuplementoService{
     private final SuplementoRepository repository;
     private final SuplementoMapper mapper;
 
+    //CONSTRUTOR
     public SuplementoServiceImplemento(SuplementoRepository repository, SuplementoMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
+    //METODOS
     @Override
     public SuplementoDto salvar(SuplementoDto dto){
         Suplemento suplemento = mapper.toEntity(dto);
         return mapper.toDto(repository.save(suplemento));
-
     }
 
     @Override
@@ -36,8 +37,8 @@ public class SuplementoServiceImplemento implements SuplementoService{
 
     @Override
     public List<SuplementoDto> listarTodos(){
-        return repository.findAll()
-                .stream().map(mapper::toDto)
+        return repository.findAll().stream()
+                .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
     @Override
@@ -50,9 +51,11 @@ public class SuplementoServiceImplemento implements SuplementoService{
 
     @Override
     public SuplementoDto atualizar(Long id, SuplementoDto dto) {
-        Suplemento suplemento = repository.findById(id)
-                .orElseThrow(() -> new SuplementoNaoEncontradoException(id));
-        suplemento.setNome(dto.nome);
-        return mapper.toDto(repository.save(suplemento));
+        if (!repository.existsById(id)) {
+            throw new SuplementoNaoEncontradoException(id);
+        }
+        dto.id = id;
+        Suplemento atualizado = repository.save(mapper.toEntity(dto));
+        return mapper.toDto(atualizado);
     }
 }

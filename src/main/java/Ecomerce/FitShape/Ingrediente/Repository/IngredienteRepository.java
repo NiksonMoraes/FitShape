@@ -1,4 +1,7 @@
 package Ecomerce.FitShape.Ingrediente.Repository;
 
-public interface IngredienteRepository {
+import Ecomerce.FitShape.Ingrediente.Entity.Ingrediente;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IngredienteRepository extends JpaRepository<Ingrediente, Long> {
 }

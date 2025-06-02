@@ -11,10 +11,12 @@ import java.util.List;
 public class SuplementoController {
     private final SuplementoService service;
 
+    //CONSTRUTOR
     public SuplementoController(SuplementoService service) {
         this.service = service;
     }
 
+    //METODOS
     @PostMapping
     public SuplementoDto salvar(@RequestBody SuplementoDto dto){
         return service.salvar(dto);
@@ -25,6 +27,7 @@ public class SuplementoController {
         return service.listarTodos();
     }
 
+    @PostMapping("/{id}")
     public SuplementoDto buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
     }
@@ -34,6 +37,7 @@ public class SuplementoController {
         return service.atualizar(id, dto);
     }
 
+    @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id){
         service.deletar(id);
     }
