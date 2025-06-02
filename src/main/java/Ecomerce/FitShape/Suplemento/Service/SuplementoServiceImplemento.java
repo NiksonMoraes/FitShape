@@ -1,11 +1,14 @@
 package Ecomerce.FitShape.Suplemento.Service;
 
+import Ecomerce.FitShape.Suplemento.Dto.SuplementoAtualizarDto;
+import Ecomerce.FitShape.Suplemento.Dto.SuplementoDto;
 import Ecomerce.FitShape.Suplemento.Dto.SuplementoSalvarDto;
 import Ecomerce.FitShape.Suplemento.Entity.Suplemento;
 import Ecomerce.FitShape.Suplemento.Exception.SuplementoNaoEncontradoException;
 import Ecomerce.FitShape.Suplemento.Mapper.SuplementoMapper;
 import Ecomerce.FitShape.Suplemento.Repository.SuplementoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,22 +26,24 @@ public class SuplementoServiceImplemento implements SuplementoService{
 
     //METODOS
     @Override
-    public SuplementoSalvarDto salvar(SuplementoSalvarDto dto){
-        Suplemento suplemento = mapper.toEntity(dto);
-        return mapper.tosalvarDto(repository.save(suplemento));
+    @Transactional
+    public SuplementoDto salvar(SuplementoSalvarDto dto){
+        Suplemento entity = mapper.toEntity(dto);
+        Suplemento salvo = repository.save(entity);
+        return mapper.toDto(salvo);
     }
 
     @Override
-    public SuplementoSalvarDto buscarPorId(Long id){
+    public SuplementoDto buscarPorId(Long id){
         return repository.findById(id)
-                .map(mapper::tosalvarDto)
+                .map(mapper::toDto)
                 .orElseThrow(() -> new SuplementoNaoEncontradoException(id));
     }
 
     @Override
-    public List<SuplementoSalvarDto> listarTodos(){
+    public List<SuplementoDto> listarTodos(){
         return repository.findAll().stream()
-                .map(mapper::tosalvarDto)
+                .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
     @Override
@@ -50,12 +55,12 @@ public class SuplementoServiceImplemento implements SuplementoService{
     }
 
     @Override
-    public SuplementoSalvarDto atualizar(Long id, SuplementoSalvarDto dto) {
-        if (!repository.existsById(id)) {
-            throw new SuplementoNaoEncontradoException(id);
-        }
-        atualizarDto.id = id;
-        Suplemento atualizado = repository.save(mapper.toEntity(atualizarDto));
-        return mapper.toatualizarDto(atualizado);
+    @Transactional
+    public SuplementoDto atualizar(Long id, SuplementoAtualizarDto dto) {
+        Suplemento existente = repository.findById(id)
+            .orElseThrow(() -> new SuplementoNaoEncontradoException(id));
+        mapper.atualizarEntidade(existente, dto);
+        Suplemento atualizado = repository.save(existente);
+        return mapper.toDto(atualizado);
     }
 }
